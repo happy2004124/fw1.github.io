@@ -1,0 +1,68 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Sequential Rotations on Images</title>  
+    <style>  
+        body {  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            margin: 0;  
+        }  
+  
+        .image-container {  
+            position: relative; /* 使用相对定位来定位子元素 */  
+        }  
+  
+        .animatable-image {  
+            width: 200px; /* 根据需要调整图像大小 */  
+            position: absolute; /* 使用绝对定位来放置图片 */  
+            opacity: 1; /* 初始状态为可见 */  
+            transition: transform 2s ease-in-out, opacity 2s ease-in-out;  
+        }  
+  
+        /* 定义每个图片的位置 */  
+        #image1 { top: -200px; left: -500px; }  
+        #image2 { top: 0px; left: 0px; } /* 向右下方移动 */  
+        #image3 { top: 200px; left: 500px; } /* 向右下方移动 */  
+    </style>  
+</head>  
+<body>  
+    <div class="image-container">  
+        <img id="image1" class="animatable-image" src="images/01.jpg" alt="Animated Image 1">  
+        <img id="image2" class="animatable-image" src="images/01.jpg" alt="Animated Image 2">  
+        <img id="image3" class="animatable-image" src="images/01.jpg" alt="Animated Image 3">  
+    </div>  
+  
+    <script>  
+        const images = document.querySelectorAll('.animatable-image');  
+        let currentIndex = 0;  
+  
+        function animateImage() {  
+            if (currentIndex < images.length) {  
+                const image = images[currentIndex];  
+                image.style.transform = 'rotate(360deg) scale(0)'; // 图片旋转360度后缩放至消失  
+                image.style.opacity = '0'; // 同时将透明度设置为0，使图片在旋转后消失
+                
+                // 监听动画结束事件  
+                image.addEventListener('transitionend', (event) => {  
+                    if (event.propertyName === 'transform') {  
+                        currentIndex++; // 移动到下一个图片  
+                        if (currentIndex < images.length) {  
+                            animateImage(); // 继续下一个动画  
+                        }  
+                    }  
+                });  
+            }  
+        }  
+  
+        // 两秒后开始动画  
+        setTimeout(() => {  
+            animateImage(); // 开始第一个动画  
+        }, 1000); // 延迟一秒  
+    </script>  
+</body>  
+</html>

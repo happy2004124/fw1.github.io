@@ -1,0 +1,23 @@
+body {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  height: 200vh;  
+  margin: 0;  
+}  
+
+.image-container {  
+  position: relative; /* 使用相对定位来定位子元素 */  
+}  
+
+.animatable-image {  
+  width: 200px; /* 根据需要调整图像大小 */  
+  position: absolute; /* 使用绝对定位来放置图片 */  
+  opacity: 1; /* 初始状态为可见 */  
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;  
+}  
+
+/* 定义每个图片的位置 */  
+#image1 { top: 0; left: 0; }  
+#image2 { top: 150px; left: 150px; } /* 向右下方移动 */  
+#image3 { top: 300px; left: 300px; } /* 向右下方移动 */
